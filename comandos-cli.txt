@@ -1,0 +1,16 @@
+
+###AWS CLI
+## MANEIRA CORRETA DE CRIAR UMA NOVA KEYPAIR NO EC2:
+aws ec2 create-key-pair --key-name default --query 'KeyMaterial' --output text > default1.pem
+
+### AWS CLI
+## MANEIRA CORRETA DE CRIAR UMA STACK NO CLOUDFORMATION VIA AWS CLI COM A KEYPAIR EXISTENTE NA PLATAFORMA E DEVIDA REGIÃO INDICADA:
+aws cloudformation create-stack --stack-name userdata --template-body file://1-ec2-user-data.yaml --parameters ParameterKey=KeyName,ParameterValue=default
+
+### AWS CLI
+## MANEIRA CORRETA DE ATUALIZAR SUA STACK JÁ EXISTENTE NO CLOUDFORMATION:
+aws cloudformation update-stack --stack-name userdata --template-body file://1-ec2-user-data.yaml --parameters ParameterKey=KeyName,ParameterValue=default
+
+### AWS CLI
+## MANEIRA CORRETA DE DELETAR SUA STACK EXISTENTE NO CLOUDFORMATION:
+aws cloudformation delete-stack --stack-name userdata
